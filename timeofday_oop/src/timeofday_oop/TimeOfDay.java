@@ -13,12 +13,11 @@ package timeofday_oop;
 public class TimeOfDay {
 	
 	/**
-	 * @invar | 0<= hours && hours <= 23
-	 * @invar | 0<= minutes && minutes <= 59
+	 * @invar | 0<= minutesSinceMidnight
+	 * @invar | minutesSinceMidnight < 24 * 60
 	 */
 	
-	private int hours;
-	private int minutes;
+	private final int minutesSinceMidnight;
 	
 	/**
 	 * 
@@ -26,7 +25,7 @@ public class TimeOfDay {
 	 */
 	
 	public int getHours() {
-		return hours;
+		return minutesSinceMidnight/60;
 	}
 	
 	/**
@@ -34,7 +33,7 @@ public class TimeOfDay {
 	 */
 	
 	public int getMinutes() {
-		return minutes;
+		return minutesSinceMidnight % 60;
 	}
 	
 	/**
@@ -43,7 +42,7 @@ public class TimeOfDay {
 	 */
 	
 	public int getMinutesSinceMidnight() {
-		return hours * 60 + minutes;
+		return minutesSinceMidnight;
 	}
 	
 	/**
@@ -63,8 +62,7 @@ public class TimeOfDay {
 		if (minutes < 0 || 59 < minutes) {
 			throw new IllegalArgumentException("`minutes` is invalid");
 		}
-		this.hours = hours;
-		this.minutes = minutes;
+		this.minutesSinceMidnight = hours * 60 + minutes;
 	}
 
 }
