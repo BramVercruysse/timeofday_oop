@@ -6,7 +6,7 @@ package timeofday_oop;
  * @invar | 0 <= getHours() && getHours() <=23
  * @invar | 0<= getMinutes() || getMinutes() <= 59
  * 
- *@immutable
+
  *
  */
 
@@ -17,7 +17,7 @@ public class TimeOfDay {
 	 * @invar | minutesSinceMidnight < 24 * 60
 	 */
 	
-	private final int minutesSinceMidnight;
+	private int minutesSinceMidnight;
 	
 	/**
 	 * 
@@ -63,6 +63,38 @@ public class TimeOfDay {
 			throw new IllegalArgumentException("`minutes` is invalid");
 		}
 		this.minutesSinceMidnight = hours * 60 + minutes;
+	}
+	
+	/**
+	 * Sets this object's hours to the given hours.
+	 * 
+	 * @mutates | this
+	 * 
+	 * @pre | 0 <= newHours && newHours <=23
+	 * 
+	 * @post | getHours() == newHours
+	 * @post | getMinutes() == old(getMinutes())
+	 */
+	
+	public void setHours(int newHours) {
+		minutesSinceMidnight = 60 * newHours + getMinutes();
+		
+	}
+	
+	/**
+	 * Set's this object's minutes to the given minutes.
+	 * 
+	 * @mutates | this
+	 * 
+	 * @pre | 0<= newMinutes && newMinutes <= 59
+	 * 
+	 * @post | getHours() == old(getHours())
+	 * @post | getMinutes() == newMinutes
+	 *
+	 */
+	
+	public void SetMinutes(int newMinutes) {
+		minutesSinceMidnight = 60 * getHours() + newMinutes;
 	}
 
 }
